@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 
 /**
- * PlayerData by recurse404 created for Bukkit.
+ * PlayerData by recode404 created for Bukkit.
  */
 public class Main extends JavaPlugin {
 
