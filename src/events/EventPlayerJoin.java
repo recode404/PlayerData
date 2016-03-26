@@ -15,7 +15,6 @@ public class EventPlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         player = event.getPlayer();
-
         player.sendMessage("PlayerData is running...");
     }
 }
