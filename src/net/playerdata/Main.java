@@ -1,27 +1,28 @@
-package main;
+package net.playerdata;
 
 import events.EventPlayerJoin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+
 /**
  * PlayerData by recurse404 created for Bukkit.
  */
-public class PlayerData extends JavaPlugin {
+public class Main extends JavaPlugin {
 
-    private static JavaPlugin instance;
+    private static File dir;
 
     @Override
     public void onEnable() {
-        instance = this;
-
         registerListeners();
         registerCommands();
+        loadDataFolder();
     }
 
     @Override
     public void onDisable() {
-        instance = null;
+        dir = null;
     }
 
     private void registerListeners() {
@@ -34,7 +35,13 @@ public class PlayerData extends JavaPlugin {
 
     }
 
-    public static JavaPlugin getInstance() {
-        return instance;
+    private void loadDataFolder() {
+        dir = this.getDataFolder();
+        if(!dir.exists())
+            dir.mkdirs();
+    }
+
+    public static File dataFolder() {
+        return dir;
     }
 }
