@@ -1,9 +1,11 @@
 package main;
 
+import events.EventPlayerJoin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * Created by Taylor on 3/25/16.
+ * PlayerData by recurse404 created for Bukkit.
  */
 public class PlayerData extends JavaPlugin {
 
@@ -12,6 +14,7 @@ public class PlayerData extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
         registerListeners();
         registerCommands();
     }
@@ -22,10 +25,16 @@ public class PlayerData extends JavaPlugin {
     }
 
     private void registerListeners() {
+        PluginManager pm = this.getServer().getPluginManager();
 
+        pm.registerEvents(new EventPlayerJoin(), this);
     }
 
     private void registerCommands() {
 
+    }
+
+    public static JavaPlugin getInstance() {
+        return instance;
     }
 }
