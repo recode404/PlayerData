@@ -1,7 +1,6 @@
 package net.playerdata;
 
 import events.EventPlayerJoin;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -16,7 +15,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         registerListeners();
-        registerCommands();
         loadDataFolder();
     }
 
@@ -26,13 +24,7 @@ public class Main extends JavaPlugin {
     }
 
     private void registerListeners() {
-        PluginManager pm = this.getServer().getPluginManager();
-
-        pm.registerEvents(new EventPlayerJoin(), this);
-    }
-
-    private void registerCommands() {
-
+        this.getServer().getPluginManager().registerEvents(new EventPlayerJoin(), this);
     }
 
     private void loadDataFolder() {

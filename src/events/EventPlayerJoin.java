@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 /**
- * handles when player joins server.
+ * Handles when player joins server.
  */
 public class EventPlayerJoin implements Listener {
 
