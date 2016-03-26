@@ -16,6 +16,7 @@ public class EventPlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         player = event.getPlayer();
-        player.sendMessage("you are rank " + new PlayerData().getRank(player.getUniqueId()));
+        PlayerData pd = new PlayerData(player.getUniqueId());
+        player.sendMessage("you are rank " + pd.getRank());
     }
 }

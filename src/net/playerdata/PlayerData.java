@@ -13,20 +13,31 @@ import java.util.UUID;
 public class PlayerData {
     private File file;
     private YamlConfiguration config;
+    private UUID id = null;
 
-    private void load(UUID id) {
+    public PlayerData(UUID id) {
+        this.id = id;
+    }
+
+    private void load() {
         file = new File(Main.dataFolder() + File.separator + id + ".yml");
 
         if(!file.exists())
             try {
                 file.createNewFile();
                 config = YamlConfiguration.loadConfiguration(file);
-                loadDefaults(id);
+                loadDefaults();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         else
             config = YamlConfiguration.loadConfiguration(file);
+    }
+
+    private void loadDefaults() {
+        config.set("name", Bukkit.getPlayer(id).getName());
+        config.set("rank", 0);
+        save();
     }
 
     private void save() {
@@ -37,19 +48,16 @@ public class PlayerData {
         }
     }
 
-    private void loadDefaults(UUID id) {
-        config.set("name", Bukkit.getPlayer(id).getName());
-        config.set("rank", 0);
+    public void setName(String name) {
+        config.set("name", name);
         save();
     }
 
-    public int getRank(UUID id) {
-        load(id);
+    public int getRank() {
         return config.getInt("rank");
     }
 
-    public void setRank(UUID id, int rank) {
-        load(id);
+    public void setRank(int rank) {
         config.set("rank", rank);
         save();
     }
