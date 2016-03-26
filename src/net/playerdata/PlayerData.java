@@ -1,5 +1,6 @@
 package net.playerdata;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -13,17 +14,19 @@ public class PlayerData {
     private File file;
     private YamlConfiguration config;
 
-    private void load(UUID uuid) {
-        file = new File(Main.dataFolder() + File.separator + uuid + ".yml");
+    private void load(UUID id) {
+        file = new File(Main.dataFolder() + File.separator + id + ".yml");
 
         if(!file.exists())
             try {
                 file.createNewFile();
+                config = YamlConfiguration.loadConfiguration(file);
+                loadDefaults(id);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-        config = YamlConfiguration.loadConfiguration(file);
+        else
+            config = YamlConfiguration.loadConfiguration(file);
     }
 
     private void save() {
@@ -34,13 +37,19 @@ public class PlayerData {
         }
     }
 
-    public int getRank(UUID uuid) {
-        load(uuid);
+    private void loadDefaults(UUID id) {
+        config.set("name", Bukkit.getPlayer(id).getName());
+        config.set("rank", 0);
+        save();
+    }
+
+    public int getRank(UUID id) {
+        load(id);
         return config.getInt("rank");
     }
 
-    public void setRank(UUID uuid, int rank) {
-        load(uuid);
+    public void setRank(UUID id, int rank) {
+        load(id);
         config.set("rank", rank);
         save();
     }

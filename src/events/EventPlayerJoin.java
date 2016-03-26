@@ -1,5 +1,6 @@
 package events;
 
+import net.playerdata.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +16,6 @@ public class EventPlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         player = event.getPlayer();
-        player.sendMessage("PlayerData is running...");
+        player.sendMessage("you are rank " + new PlayerData().getRank(player.getUniqueId()));
     }
 }

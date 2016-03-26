@@ -2,6 +2,3 @@ name: PlayerData
 main: net.playerdata.Main
 version: 1.0
 author: recode404
-commands:
-    pdata:
-        description: All player data related commands.
