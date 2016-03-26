@@ -33,7 +33,5 @@ public class Main extends JavaPlugin {
             dir.mkdirs();
     }
 
-    public static File dataFolder() {
-        return dir;
-    }
+    public static File dataFolder() { return dir;}
 }
