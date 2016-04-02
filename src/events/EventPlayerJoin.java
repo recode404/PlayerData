@@ -12,11 +12,19 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class EventPlayerJoin implements Listener {
 
     private Player player;
+    private PlayerData pd;
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         player = event.getPlayer();
-        PlayerData pd = new PlayerData(player.getUniqueId());
-        player.sendMessage("you are rank " + pd.getRank());
+        pd = new PlayerData(player.getUniqueId());
+
+        currentDataCheck();
+    }
+
+    //updates any information that may have changed while player was offline
+    private void currentDataCheck() {
+        if(!pd.getName().equals(player.getName()))
+            pd.setName(player.getName());
     }
 }

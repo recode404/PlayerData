@@ -15,7 +15,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         registerListeners();
-        loadDataFolder();
+        loadFiles();
     }
 
     @Override
@@ -27,10 +27,12 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new EventPlayerJoin(), this);
     }
 
-    private void loadDataFolder() {
+    private void loadFiles() {
+        //load data folder
         dir = this.getDataFolder();
         if(!dir.exists())
             dir.mkdirs();
+
     }
 
     public static File dataFolder() { return dir;}
